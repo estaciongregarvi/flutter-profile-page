@@ -1,119 +1,166 @@
 import 'package:flutter/material.dart';
 
-void main() {
+
+void main () {
+
   runApp(MyApp());
+
 }
+
 
 class MyApp extends StatelessWidget {
+
   @override
+
   Widget build(BuildContext context) {
+
     return MaterialApp(
-      title: 'My Profile App',
-      theme: ThemeData(
+
+      title: 'Image Carousel App',
+
+      theme:  ThemeData(
+
         primarySwatch: Colors.blue,
+
       ),
-      home: ProfilePage(),
+
+      home: HomePage(),
+
     );
+
   }
+
 }
 
-class ProfilePage extends StatelessWidget {
+
+class HomePage extends StatelessWidget {
+
+
+  final List imageUrls = [
+
+    'https://picsum.photos/400/300?random=1',
+
+    'https://picsum.photos/400/300?random=2',
+
+    'https://picsum.photos/400/300?random=3',
+
+    'https://picsum.photos/400/300?random=4',
+
+    'https://picsum.photos/400/300?random=5',
+
+  ];
+
+
   @override
+
   Widget build(BuildContext context) {
+
     return Scaffold(
-      backgroundColor: Colors.grey[100],
+
       appBar: AppBar(
-        title: Text('Profile'),
-        centerTitle: true,
+
+        title: Text('My Photo Gallery'),
+
         backgroundColor: Colors.blue,
-        elevation: 0,
+
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // profile picture
-            Container(
-              width: 200,
-              height: 200,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: Colors.red,
-                  width: 4,
-                ),
-                boxShadow: [
-                  BoxShadow(
+
+      body: Column(
+
+        children: [
+
+          Container(
+
+            height: 300,
+
+            child: ListView.builder(
+
+              scrollDirection: Axis.horizontal,
+
+              itemCount: imageUrls.length,
+
+              itemBuilder: (context, index) {
+
+                return Container(
+
+                  margin: EdgeInsets.all(8.0),
+
+                  child: ClipRRect(
+
+                    borderRadius: BorderRadius.circular(10),
+
+                    child: Image.network(
+
+                      imageUrls[index],
+
+                      width: 400,
+
+                      height: 300,
+
+                      fit: BoxFit.cover,
+
+                    ),//
+
+                  ),//
+
+                );//
+
+              },
+
+            ),//
+
+          ),//
+
+          Padding(padding: EdgeInsets.all(16.0),
+
+            child: Column(
+
+              children: [
+
+                Text('Image Gallery',
+
+                  style: TextStyle(
+
+                    fontSize: 24,
+
+                    fontWeight: FontWeight.bold,
+
                     color: Colors.blue,
-                    blurRadius: 10,
-                    offset: Offset(0, 5),
-                  ),
-                ],
-              ),
-              child: ClipOval(
-                child: Image.network(
-                  'https://lh3.googleusercontent.com/a/ACg8ocLv5vnjZwZEszZZnq7L6wp14KzSuB8Q7-9N3WlfdYgy_1-BGfqK=s288-c-no',
-                  width: 150,
-                  height: 150,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
 
-            // Name
-            SizedBox(height: 20),
-            Text(
-              'Greg Arvi Estacion',
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Colors.black87,
-              ),
-            ),
+                  ),//
 
-            // about me section
-            SizedBox(height: 30),
-            Container(
-              padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(15),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 8,
-                    offset: Offset(0, 3),
-                  )
-                ],
-              ), //box decoration
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'About self',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.red,
-                    ), //textstyle
-                  ),
-                  SizedBox(height: 10),
-                  Text(
-                    'about self',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey[700],
-                      height: 1.5,
-                    ),
-                    textAlign: TextAlign.left,
-                  ),
-                ], //text
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+                ),//
+
+
+                SizedBox(height: 8),
+
+                Text('Swipe left or right to explore there amazing photos. Each Image is randomly generation',
+
+                  style: TextStyle(
+
+                    fontSize: 16,
+
+                    color: Colors.grey[600],
+
+                  ),//
+
+                  textAlign: TextAlign.center,
+
+                ),//
+
+              ],
+
+            ),//
+
+          ),//
+
+        ],
+
+      ),//
+
+    );//
+
   }
+
 }
 
